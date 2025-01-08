@@ -60,13 +60,13 @@ def predict_image(img):
 # Streamlit arayüzü
 st.title("Demans Sınıflandırma Uygulaması")
 
-uploaded_files = st.file_uploader('Tomografi Resimlerini Yükleyin (en fazla 3 adet)', accept_multiple_files=True, type=['png', 'jpg', 'jpeg'])
+uploaded_files = st.file_uploader('Tomografi Resimlerini Yükleyin (en fazla 5 adet)', accept_multiple_files=True, type=['png', 'jpg', 'jpeg'])
 
 if uploaded_files:
     predictions = []
     confidences = []
 
-    for file in uploaded_files[:3]:  # Maksimum 3 dosya işleme
+    for file in uploaded_files[:5]:  # Maksimum 5 dosya işleme
         img_bytes = file.getvalue()
         img = Image.open(BytesIO(img_bytes)).convert('L')  # Görüntüyü siyah-beyaza dönüştür
         predicted_class, confidence = predict_image(img)
@@ -83,4 +83,4 @@ if uploaded_files:
     st.write(f"Ortalama İnanılırlık Yüzdesi: {avg_confidence * 100:.2f}%")
 
 else:
-    st.write("Lütfen en fazla 3 resim yükleyin.")
+    st.write("Lütfen en fazla 5 resim yükleyin.")
